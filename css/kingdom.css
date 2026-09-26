@@ -1,0 +1,91 @@
+/* Luna's Snow Kingdom: tactile, forgiving, iPad-first play. */
+.home-screen { overflow-y: auto; }
+.home-card.card-princess { background: linear-gradient(145deg, #fff8db, #f7d3ee 62%, #dcc9ff); color: #65318d; }
+.home-card.card-princess img { border: 5px solid #fff; border-radius: 45%; object-fit: cover; object-position: center 18%; transform: none; box-shadow: 0 6px 16px #6c409844; }
+@media (orientation: landscape) and (min-width: 700px) {
+  .home-grid { max-width: 1060px; }
+  .home-card { min-height: 165px; flex-basis: 185px; }
+  .home-card img { height: 90px; width: 105px; }
+}
+.kingdom-screen { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: max(100px, calc(var(--safe-top) + 88px)) max(14px, var(--safe-right)) max(12px, var(--safe-bottom)) max(14px, var(--safe-left)); color: #26375c; }
+.kingdom-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: min(100%, 850px); min-height: 64px; }
+.kingdom-title { display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; text-shadow: 0 2px 6px #293f86, 0 0 20px #7d5cbd; }
+.kingdom-title span { font-size: clamp(11px, 2vw, 15px); font-weight: 900; letter-spacing: .17em; }
+.kingdom-title strong { font-size: clamp(26px, 5vw, 42px); line-height: 1.02; }
+.kingdom-home, .kingdom-badge, .kingdom-tab, .kingdom-big { border: 3px solid #fff; border-radius: 22px; background: linear-gradient(#fff, #e8e6ff); box-shadow: 0 5px 0 #8d83bf, 0 8px 20px #29397545; color: #4e3b82; font-weight: 900; }
+.kingdom-home { min-width: 86px; min-height: 62px; padding: 8px 14px; font-size: 18px; }
+.kingdom-badge { display: flex; align-items: center; justify-content: center; gap: 3px; min-width: 72px; min-height: 62px; padding: 5px; font-size: 18px; }
+.kingdom-badge img { width: 32px; height: 32px; }
+.kingdom-tabs { display: flex; justify-content: center; gap: 10px; width: min(100%, 850px); }
+.kingdom-tab { flex: 1; min-height: 62px; font-size: clamp(17px, 2.5vw, 24px); cursor: pointer; }
+.kingdom-tab[aria-pressed="true"] { background: linear-gradient(#ffeaae, #f8caeb); color: #672e78; box-shadow: 0 3px 0 #a765ab; }
+.kingdom-body { width: min(100%, 850px); flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.kingdom-panel { display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 100%; padding: clamp(12px, 2vw, 24px); border: 4px solid #fff; border-radius: 32px; background: linear-gradient(155deg, #fffcfff2, #d7eafaed 65%, #ead9faeb); box-shadow: 0 14px 35px #263f8b55; }
+.kingdom-panel[hidden] { display: none !important; }
+.kingdom-callout, .kingdom-status { margin: 0; max-width: 100%; padding: 8px 16px; border-radius: 20px; background: #fff; color: #75459e; text-align: center; font-size: clamp(18px, 2.7vw, 24px); font-weight: 900; }
+.kingdom-status { width: min(100%, 850px); min-height: 44px; background: #fffdf7dd; font-size: 16px; color: #4d4880; }
+.kingdom-big { min-height: 64px; padding: 10px 26px; background: linear-gradient(#ffe8a7, #edbcef); font-size: clamp(18px, 2.8vw, 25px); cursor: pointer; }
+.kingdom-big:active, .kingdom-home:active, .kingdom-tab:active { transform: translateY(3px); box-shadow: 0 2px 0 #8d83bf; }
+.castle-scene { position: relative; isolation: isolate; width: min(100%, 620px); height: clamp(300px, 42vh, 470px); overflow: hidden; border: 4px solid #fff; border-radius: 36px; background: radial-gradient(circle at 50% 25%, #fff7cf 0 4%, #cdb9f9 29%, #8bc9f2 66%, #7da7dd 100%); box-shadow: inset 0 0 45px #ffffffaa, 0 12px 30px #5e4f9c55; }
+.castle-scene::before { content: ""; position: absolute; left: 20%; right: 20%; bottom: 0; height: 73%; background: linear-gradient(90deg, #849bdd, #e9ecff 18%, #a5bce9 50%, #e9ecff 82%, #849bdd); clip-path: polygon(0 28%, 12% 28%, 12% 0, 24% 28%, 42% 28%, 50% 0, 58% 28%, 76% 28%, 88% 0, 88% 28%, 100% 28%, 100% 100%, 0 100%); border-radius: 9% 9% 0 0; filter: drop-shadow(0 2px 10px #4e5fb8); z-index: -1; }
+.castle-scene::after { content: ""; position: absolute; left: 43%; bottom: -5%; width: 14%; height: 32%; border-radius: 60% 60% 0 0; background: linear-gradient(90deg, #5769a4, #a3a5d5, #5769a4); box-shadow: 0 0 18px #fff inset; }
+.castle-halo { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: radial-gradient(circle at 50% 38%, #fffadd 0, #ffe6a577 32%, transparent 66%); transition: opacity .6s; }
+.castle-scene.lit .castle-halo { opacity: 1; }
+.castle-crown, .castle-window, .castle-friend, .castle-snowflake { position: absolute; z-index: 2; display: grid; place-items: center; border: 3px solid #fff; box-shadow: 0 5px 16px #4c478388; cursor: pointer; }
+.castle-crown { top: 3%; left: 42%; width: 16%; min-width: 68px; height: 74px; border-radius: 23px; background: #ffffffcd; }
+.crown-shape { display: block; width: 62px; height: 45px; background: linear-gradient(135deg, #fff8ce, #73dcf5 52%, #c3a3ff); clip-path: polygon(0 22%, 22% 51%, 34% 0, 50% 43%, 66% 0, 78% 51%, 100% 22%, 90% 90%, 10% 90%); filter: drop-shadow(0 3px 2px #573c9a); }
+[data-crown="gold"] .crown-shape, .mirror-portrait[data-crown="gold"] .crown-shape, .castle-scene[data-crown="gold"] .crown-shape { background: linear-gradient(135deg, #fff4aa, #f4b943 55%, #fff8cc); }
+[data-crown="rose"] .crown-shape, .mirror-portrait[data-crown="rose"] .crown-shape, .castle-scene[data-crown="rose"] .crown-shape { background: linear-gradient(135deg, #fff3f5, #f181b4 55%, #c578d8); }
+.castle-window { top: 40%; width: 10%; height: 18%; min-width: 47px; min-height: 60px; border-radius: 47% 47% 8px 8px; background: #4f679d; }
+.castle-window[data-window="one"] { left: 29%; }.castle-window[data-window="two"] { left: 45%; }.castle-window[data-window="three"] { left: 61%; }
+.castle-window.lit { background: radial-gradient(#fffbed, #ffe47e 60%, #ed9ed3); box-shadow: 0 0 28px #fff6a8, inset 0 0 15px #fff; }
+.castle-friend { bottom: 2%; left: 1%; width: 22%; height: 30%; min-height: 94px; border-radius: 50%; background: #fffdf4dd; }
+.castle-friend img { width: 100%; height: 125%; object-fit: contain; }
+.castle-friend.nuzzle { animation: nuzzle .5s ease; }
+.castle-snowflake { top: 8%; right: 4%; width: 16%; min-width: 70px; height: 74px; border-radius: 50%; background: #ffffffc7; }
+.castle-snowflake img { width: 65%; height: 65%; }
+.mirror-layout { display: flex; align-items: stretch; justify-content: center; gap: 18px; width: 100%; }
+.mirror-portrait { position: relative; isolation: isolate; flex: 1 1 320px; max-width: 420px; height: clamp(300px, 44vh, 440px); border: 8px solid #fdf4d7; border-radius: 48% 48% 39% 39%; background: radial-gradient(#fff9e7, #cfddfc 70%, #a8b8e9); box-shadow: 0 0 0 5px #ae8fd1, 0 10px 24px #53468177; overflow: hidden; }
+.mirror-cape { position: absolute; left: 4%; right: 4%; bottom: -12%; height: 68%; z-index: 1; background: linear-gradient(135deg, #a4eeff, #4c94d8 50%, #b7edff); clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); }
+.mirror-portrait[data-cape="pink"] .mirror-cape { background: linear-gradient(135deg, #ffe2f4, #e97cb2 50%, #ffd2e8); }
+.mirror-portrait[data-cape="violet"] .mirror-cape { background: linear-gradient(135deg, #f5ddff, #8c69ca 50%, #cfb4ef); }
+.mirror-luna { position: absolute; z-index: 2; width: 66%; height: 82%; left: 17%; bottom: 0; object-fit: cover; object-position: center 22%; border: 5px solid #fff; border-bottom: 0; border-radius: 48% 48% 15% 15%; }
+.mirror-crown { position: absolute; z-index: 3; top: 2%; left: 50%; width: 27%; height: 18%; transform: translateX(-50%); filter: drop-shadow(0 5px 5px #523b81); }
+.mirror-sparkles { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.mirror-controls { flex: 1 1 260px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.wardrobe-label { margin: 6px 0 0; color: #65448d; font-size: 18px; font-weight: 900; }
+.wardrobe-row { display: flex; justify-content: flex-start; gap: 9px; }
+.wardrobe-pick { width: clamp(68px, 9vw, 92px); height: clamp(68px, 9vw, 92px); display: grid; place-items: center; border: 4px solid #fff; border-radius: 22px; background: #d8edff; box-shadow: 0 4px 0 #8d83bf; cursor: pointer; }
+.wardrobe-pick[data-crown="gold"] { background: #ffecb4; }.wardrobe-pick[data-crown="rose"] { background: #fbe0ee; }
+.wardrobe-pick[aria-pressed="true"] { outline: 4px solid #f0a54f; outline-offset: 2px; transform: translateY(-3px); }
+.cape-pick { background: linear-gradient(130deg, #b7f0ff, #528bd1); }.cape-pick[data-cape="pink"] { background: linear-gradient(130deg, #ffe1f2, #db75ae); }.cape-pick[data-cape="violet"] { background: linear-gradient(130deg, #e7d1ff, #8260c4); }
+.wand-button { min-height: 75px; margin-top: 15px; padding: 8px 15px; border: 4px solid #fff; border-radius: 28px; background: linear-gradient(#fbe7ff, #c8b5f0); box-shadow: 0 6px 0 #8c6bb7; color: #633983; font-size: 19px; font-weight: 900; cursor: pointer; }
+.wand-button::before { content: "✦"; margin-right: 12px; color: #e0a850; font-size: 28px; }
+.magic-canvas { position: relative; width: 100%; min-height: 104px; overflow: hidden; border: 4px dashed #fff; border-radius: 26px; background: linear-gradient(90deg, #b5d7f8, #e9d7ff, #caefff); touch-action: none; cursor: crosshair; }
+.magic-canvas span { position: absolute; inset: 0; display: grid; place-items: center; color: #4c528a; font-size: 17px; font-weight: 900; pointer-events: none; }
+.magic-dot { position: absolute; width: 17px; height: 17px; border-radius: 50%; background: #fff7ce; box-shadow: 0 0 14px 6px #fff9d0; pointer-events: none; animation: dotFade .9s forwards; }
+.constellation { position: relative; flex: 1; min-height: 230px; width: min(100%, 620px); overflow: hidden; border: 4px solid #fff; border-radius: 30px; background: radial-gradient(circle at 50% 65%, #785dab, #373b80 75%, #292b63); }
+.constellation::before { content: ""; position: absolute; top: 9%; left: 44%; width: 75px; height: 75px; border-radius: 50%; background: #fff4c5; box-shadow: 0 0 38px #fff3b7; }
+.constellation-star { position: absolute; width: 32px; height: 32px; background: url('../assets/ui/star-burst.svg') center / contain no-repeat; filter: drop-shadow(0 0 8px #fff); }
+.star-family { display: flex; justify-content: center; gap: 24px; width: 100%; }
+.star-family-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 100px; min-height: 112px; padding: 5px; border: 4px solid #fff; border-radius: 25px; background: #fff7f7; box-shadow: 0 5px 12px #392d7166; color: #694180; font-size: 17px; font-weight: 900; cursor: pointer; }
+.star-family-btn img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; }
+.kingdom-screen button:focus-visible, .kingdom-screen [tabindex]:focus-visible { outline: 4px solid #f8a552; outline-offset: 4px; }
+@keyframes nuzzle { 50% { transform: rotate(-8deg) scale(1.12); } }
+@keyframes dotFade { to { opacity: 0; transform: scale(.2); } }
+@media (max-width: 700px) { .home-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(94vw, 540px); gap: 10px; }.home-card { flex-direction: column; justify-content: center; min-height: 160px; padding: 8px; text-align: center; }.home-card img { width: 95px; height: 84px; transform: none; }.home-card-copy { align-items: center; text-align: center; }.home-card-copy small { font-size: 12px; } .home-love { font-size: 17px; } .home-sub { font-size: 14px; } .kingdom-screen { padding-top: max(94px, calc(var(--safe-top) + 85px)); }.kingdom-title strong { font-size: 26px; }.kingdom-home { min-width: 68px; }.kingdom-badge { min-width: 58px; }.kingdom-panel { padding: 12px; } .mirror-layout { flex-direction: column; align-items: center; }.mirror-portrait { flex: none; width: min(84%, 310px); height: 300px; }.mirror-controls { flex: none; align-items: center; width: 100%; }.wardrobe-row { justify-content: center; }.magic-canvas { min-height: 90px; } }
+@media (max-height: 700px) and (orientation: landscape) { .kingdom-screen { padding-top: 12px; }.kingdom-header { min-height: 48px; }.kingdom-home, .kingdom-badge, .kingdom-tab { min-height: 48px; }.kingdom-panel { min-height: auto; }.castle-scene { height: 250px; } .mirror-portrait { height: 270px; }.kingdom-status { min-height: 34px; } }
+@media (prefers-reduced-motion: reduce) { .kingdom-screen *, .kingdom-screen *::before { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+body.quiet-mode .snow, body.quiet-mode .star-field { opacity: .18; pointer-events: none; }
+body.quiet-mode .kingdom-screen * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+body.princess-open .star-field { opacity: 0; pointer-events: none; }
+.world-keepsakes { position: absolute; z-index: 3; right: 3%; bottom: 2%; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; width: 42%; pointer-events: none; }
+.world-keepsake { display: grid; place-items: center; width: clamp(38px, 7vw, 52px); height: clamp(38px, 7vw, 52px); border: 3px solid #fff; border-radius: 50%; background: #fffde5; box-shadow: 0 4px 12px #34306988; }
+.world-keepsake img { width: 88%; height: 88%; object-fit: contain; }
+.world-keepsake[data-kind="snow"] { background: #4d9bd1; }
+.world-keepsake[data-kind="reindeer"] img, .world-keepsake[data-kind="snowman"] img { transform: scale(1.45); }
+@media (orientation: landscape) and (min-width: 1100px) { .home-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: min(94vw, 1060px); }.home-card { min-height: 185px; } }
+@media (orientation: landscape) and (min-width: 700px) and (max-width: 1099px) { .home-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(94vw, 920px); }.home-card { min-height: 145px; } }
+@media (orientation: portrait) and (min-height: 1000px) { .castle-scene { height: 50vh; max-height: 560px; } }
+@media (max-width: 500px) { .kingdom-screen { padding-top: max(118px, calc(var(--safe-top) + 112px)); }.kingdom-title span { font-size: 10px; }.kingdom-title strong { font-size: 23px; }.kingdom-home { min-width: 70px; padding: 6px; }.kingdom-badge { min-width: 55px; }.kingdom-tab { font-size: 16px; min-height: 56px; } }
+@media (orientation: landscape) and (min-height: 701px) and (max-height: 900px) { .mirror-portrait { height: 270px; max-width: 290px; flex-basis: 290px; }.kingdom-panel { gap: 8px; padding: 12px; }.magic-canvas { min-height: 70px; }.kingdom-big { min-height: 55px; } }

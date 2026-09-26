@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Luna's Game" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#6ec4f0" />
+    <title>Princess Luna's Elsa Game</title>
+    <link rel="stylesheet" href="css/game.css?v=family1" />
+    <link rel="stylesheet" href="css/family-voices.css?v=kingdom1" />
+    <link rel="stylesheet" href="css/kingdom.css?v=kingdom1" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div class="sky" aria-hidden="true">
+        <img
+          id="bgPalace"
+          class="bg-img bg-palace"
+          src="assets/backgrounds/ice-palace-bg.png"
+          alt=""
+        />
+        <img
+          id="bgForest"
+          class="bg-img bg-forest"
+          src="assets/backgrounds/snowy-forest-bg.png"
+          alt=""
+        />
+        <div class="snow" id="snow"></div>
+        <div class="ground-glow"></div>
+      </div>
+
+      <button
+        type="button"
+        id="parentZone"
+        class="parent-zone"
+        aria-label="Parents: hold for two seconds to open recording settings"
+      ></button>
+      <p id="parentToast" class="parent-toast" hidden>Voice on</p>
+      <p id="said" class="said" aria-live="polite"></p>
+
+      <div id="starHud" class="star-hud" hidden>
+        <img src="assets/ui/star-burst.svg" alt="" />
+        <span id="starCount">0</span>
+      </div>
+
+      <div id="starField" class="star-field" aria-hidden="false"></div>
+
+      <div class="love-strip" id="loveStrip" aria-label="Mommy and Daddy are always here">
+        <button type="button" class="love-frame" data-who="dad">
+          <img src="assets/family/luna-dad.jpg" alt="Luna with Daddy" />
+          <span>Daddy</span>
+        </button>
+        <p class="love-msg">
+          <strong>We love you!</strong>
+          <span>Always here</span>
+        </p>
+        <button type="button" class="love-frame" data-who="mom">
+          <img src="assets/family/luna-mom.jpg" alt="Luna with Mommy" />
+          <span>Mommy</span>
+        </button>
+      </div>
+
+      <section id="startScreen" class="screen start-screen">
+        <div class="start-card">
+          <div class="start-hero">
+            <img
+              id="heroLuna"
+              class="start-luna"
+              src="assets/family/luna.jpg"
+              alt="Luna"
+              width="280"
+              height="280"
+              style="object-position: center 22%"
+            />
+            <span class="start-crown" aria-hidden="true">❄️</span>
+          </div>
+          <p class="start-title">Princess Luna</p>
+          <p class="start-love">Mommy and Daddy are always here</p>
+          <p class="start-sub">They love you so much</p>
+          <div class="start-family">
+            <button type="button" class="family-btn" data-who="mom">
+              <img src="assets/family/luna-mom.jpg" alt="Mommy and Luna" />
+              <span>Mommy</span>
+            </button>
+            <button type="button" class="family-btn" data-who="dad">
+              <img src="assets/family/luna-dad.jpg" alt="Daddy and Luna" />
+              <span>Daddy</span>
+            </button>
+          </div>
+          <div class="start-photos" id="lunaPhotos">
+            <button
+              type="button"
+              class="luna-pick"
+              data-who="luna"
+              data-src="assets/family/luna.jpg"
+              data-pos="center 22%"
+              aria-label="Luna"
+            >
+              <img
+                src="assets/family/luna.jpg"
+                alt="Luna"
+                style="object-position: center 22%"
+              />
+            </button>
+            <button
+              type="button"
+              class="luna-pick"
+              data-who="luna"
+              data-src="assets/family/luna-smile.jpg"
+              data-pos="74% 28%"
+              aria-label="Luna smiling"
+            >
+              <img
+                src="assets/family/luna-smile.jpg"
+                alt="Luna smiling"
+                style="object-position: 74% 28%"
+              />
+            </button>
+            <button
+              type="button"
+              class="luna-pick"
+              data-who="luna"
+              data-src="assets/family/luna-wings.jpg"
+              data-pos="center 22%"
+              aria-label="Luna with wings"
+            >
+              <img
+                src="assets/family/luna-wings.jpg"
+                alt="Luna with wings"
+                style="object-position: center 22%"
+              />
+            </button>
+          </div>
+          <p class="start-hint">Tap the big button!</p>
+          <button type="button" id="playBtn" class="play-btn">Play</button>
+          <p class="parent-hint">
+            For Mommy and Daddy: hold the top-right corner for two seconds to record your voices.
+          </p>
+        </div>
+      </section>
+
+      <section id="homeScreen" class="screen home-screen" hidden>
+        <p class="home-love">Mommy and Daddy are always here</p>
+        <p class="home-sub">They love you, Luna. Tap a picture!</p>
+        <div class="home-grid">
+          <button type="button" id="goPrincess" class="home-card card-princess" aria-label="Enter Princess Luna's castle">
+            <img src="assets/family/luna-wings.jpg" alt="" />
+            <span class="home-card-copy"><span>My Castle</span><small>Dress up · make magic</small></span>
+          </button>
+          <button type="button" id="goBuild" class="home-card" aria-label="Build a snowman">
+            <img src="assets/characters/snowman-complete.png" alt="" />
+            <span class="home-card-copy">
+              <span>Snowman</span>
+              <small>Build · dress · tickle</small>
+            </span>
+          </button>
+          <button type="button" id="goFeed" class="home-card card-feed" aria-label="Feed the reindeer">
+            <img src="assets/characters/baby-reindeer.png" alt="" />
+            <span class="home-card-copy">
+              <span>Carrots</span>
+              <small>Feed · pet · berry</small>
+            </span>
+          </button>
+          <button type="button" id="goSnow" class="home-card card-snow" aria-label="Make it snow">
+            <img src="assets/ui/snowflake.svg" alt="" />
+            <span class="home-card-copy">
+              <span>Snow</span>
+              <small>Blizzard · crystals · draw</small>
+            </span>
+          </button>
+          <button type="button" id="goLearn" class="home-card card-learn" aria-label="Learn with Luna">
+            <img src="assets/ui/star-burst.svg" alt="" />
+            <span class="home-card-copy">
+              <span>Learn</span>
+              <small>Count · colors · letters</small>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section id="kingdomScreen" class="screen kingdom-screen" hidden aria-label="Princess Luna's castle">
+        <header class="kingdom-header">
+          <button type="button" id="kingdomHome" class="kingdom-home" aria-label="Return to the game worlds">Home</button>
+          <div class="kingdom-title"><span>PRINCESS LUNA'S</span><strong>Snow Kingdom</strong></div>
+          <div class="kingdom-badge" aria-live="polite"><img src="assets/ui/star-burst.svg" alt="" /><span id="keepsakeCount">0</span></div>
+        </header>
+        <nav class="kingdom-tabs" aria-label="Snow Kingdom places">
+          <button type="button" class="kingdom-tab" data-place="castle" aria-pressed="true">Castle</button>
+          <button type="button" class="kingdom-tab" data-place="mirror" aria-pressed="false">Mirror</button>
+          <button type="button" class="kingdom-tab" data-place="stars" aria-pressed="false">Stars</button>
+        </nav>
+        <div class="kingdom-body">
+          <section class="kingdom-panel castle-panel" data-panel="castle" aria-label="Luna's castle">
+            <p class="kingdom-callout" id="castleMessage">Your castle is waiting, Luna!</p>
+            <div class="castle-scene" id="castleScene">
+              <div class="castle-halo" aria-hidden="true"></div>
+              <button type="button" id="castleCrown" class="castle-crown" aria-label="See your princess crown"><span class="crown-shape"></span></button>
+              <button type="button" class="castle-window" data-window="one" aria-label="Light the first castle window"></button>
+              <button type="button" class="castle-window" data-window="two" aria-label="Light the second castle window"></button>
+              <button type="button" class="castle-window" data-window="three" aria-label="Light the third castle window"></button>
+              <div id="worldKeepsakes" class="world-keepsakes" aria-label="Treasures from Luna's worlds"></div>
+              <button type="button" id="castleFriend" class="castle-friend" aria-label="Pet your reindeer friend"><img src="assets/characters/baby-reindeer.png" alt="" /></button>
+              <button type="button" id="castleSnowflake" class="castle-snowflake" aria-label="Make a snowflake"><img src="assets/ui/snowflake.svg" alt="" /></button>
+            </div>
+            <button type="button" class="kingdom-big" data-go="mirror">Dress up, Princess Luna</button>
+          </section>
+          <section class="kingdom-panel mirror-panel" data-panel="mirror" aria-label="Princess Mirror" hidden>
+            <p class="kingdom-callout" id="mirrorMessage">Pick a crown, Luna!</p>
+            <div class="mirror-layout">
+              <div class="mirror-portrait" id="mirrorPortrait" aria-label="Luna wearing her chosen princess look">
+                <div class="mirror-cape" id="mirrorCape" aria-hidden="true"></div>
+                <img class="mirror-luna" src="assets/family/luna.jpg" alt="Luna" />
+                <div class="mirror-crown crown-shape" id="mirrorCrown" aria-hidden="true"></div>
+                <div class="mirror-sparkles" id="mirrorSparkles" aria-hidden="true"></div>
+              </div>
+              <div class="mirror-controls">
+                <p class="wardrobe-label">Choose a crown</p>
+                <div class="wardrobe-row" role="group" aria-label="Crown colors">
+                  <button type="button" class="wardrobe-pick" data-crown="ice" aria-label="Ice crown" aria-pressed="true"><span class="crown-shape"></span></button>
+                  <button type="button" class="wardrobe-pick" data-crown="gold" aria-label="Golden crown" aria-pressed="false"><span class="crown-shape"></span></button>
+                  <button type="button" class="wardrobe-pick" data-crown="rose" aria-label="Rose crown" aria-pressed="false"><span class="crown-shape"></span></button>
+                </div>
+                <p class="wardrobe-label">Choose a cape</p>
+                <div class="wardrobe-row" role="group" aria-label="Cape colors">
+                  <button type="button" class="wardrobe-pick cape-pick" data-cape="blue" aria-label="Blue cape" aria-pressed="true"></button>
+                  <button type="button" class="wardrobe-pick cape-pick" data-cape="pink" aria-label="Pink cape" aria-pressed="false"></button>
+                  <button type="button" class="wardrobe-pick cape-pick" data-cape="violet" aria-label="Violet cape" aria-pressed="false"></button>
+                </div>
+                <button type="button" id="wandButton" class="wand-button" aria-label="Tap or hold to cast snow magic">Cast snow magic</button>
+              </div>
+            </div>
+            <div id="magicCanvas" class="magic-canvas" aria-label="Draw a sparkling snow trail with your finger"><span>Draw a snow trail here</span></div>
+            <button type="button" class="kingdom-big" data-go="castle">See my castle</button>
+          </section>
+          <section class="kingdom-panel stars-panel" data-panel="stars" aria-label="Family stars" hidden>
+            <p class="kingdom-callout" id="starsMessage">Your love lights up the sky.</p>
+            <div id="constellation" class="constellation" aria-label="Luna's collection of stars"></div>
+            <div class="star-family">
+              <button type="button" class="star-family-btn" data-who="dad"><img src="assets/family/luna-dad.jpg" alt="" /><span>Daddy</span></button>
+              <button type="button" class="star-family-btn" data-who="mom"><img src="assets/family/luna-mom.jpg" alt="" /><span>Mommy</span></button>
+            </div>
+            <button type="button" id="goodnightButton" class="kingdom-big">Moonlight hug</button>
+          </section>
+        </div>
+        <p id="kingdomStatus" class="kingdom-status" aria-live="polite">Your magic makes this place yours.</p>
+      </section>
+
+      <section id="gameScreen" class="screen game-screen" hidden>
+        <aside class="guide" id="guide">
+          <button
+            type="button"
+            id="lunaBtn"
+            class="luna-btn"
+            aria-label="Hear again"
+          >
+            <img src="assets/family/luna.jpg" alt="Luna" class="luna-img" />
+            <span class="luna-sparkle" aria-hidden="true"></span>
+            <span class="luna-name">Luna</span>
+          </button>
+          <div class="bubble" id="bubble">
+            <div class="bubble-pic" id="bubblePic" aria-hidden="true"></div>
+            <div class="bubble-copy">
+              <p class="bubble-text" id="bubbleText"></p>
+              <div id="loveRow" class="love-row" hidden>
+                <button type="button" class="love-mini" data-who="mom">
+                  <img src="assets/family/luna-mom.jpg" alt="Mommy" />
+                </button>
+                <button type="button" class="love-mini" data-who="dad">
+                  <img src="assets/family/luna-dad.jpg" alt="Daddy" />
+                </button>
+                <button type="button" class="luna-pick" data-who="luna">
+                  <img
+                    src="assets/family/luna-smile.jpg"
+                    alt="Luna"
+                    style="object-position: 74% 28%"
+                  />
+                </button>
+                <button type="button" class="luna-pick" data-who="luna">
+                  <img
+                    src="assets/family/luna-wings.jpg"
+                    alt="Luna"
+                    style="object-position: center 18%"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main class="stage">
+          <button
+            type="button"
+            id="worldTap"
+            class="world-tap"
+            aria-label="Sparkle"
+          ></button>
+          <button
+            type="button"
+            id="magicBtn"
+            class="magic-btn"
+            aria-label="Snow magic"
+            hidden
+          >
+            ✨
+          </button>
+          <button
+            type="button"
+            id="reindeerBtn"
+            class="reindeer-btn"
+            aria-label="Reindeer"
+            hidden
+          >
+            <img
+              id="reindeer"
+              class="reindeer"
+              src="assets/characters/baby-reindeer.png"
+              alt=""
+            />
+          </button>
+          <button
+            type="button"
+            id="snowmanBtn"
+            class="snowman-btn"
+            aria-label="Snowman"
+          >
+            <div id="snowmanStack" class="snowman-stack">
+              <img
+                data-part="arms"
+                class="part part-arms"
+                src="assets/snowman-pieces/stick-arm-left.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="arms-r"
+                class="part part-arms-r"
+                src="assets/snowman-pieces/stick-arm-right.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="big"
+                class="part part-big"
+                src="assets/snowman-pieces/snowball-big.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="middle"
+                class="part part-middle"
+                src="assets/snowman-pieces/snowball-middle.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="buttons"
+                class="part part-buttons"
+                src="assets/snowman-pieces/buttons.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="scarf"
+                class="part part-scarf"
+                src="assets/snowman-pieces/scarf.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="head"
+                class="part part-head"
+                src="assets/snowman-pieces/snowball-small.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="eyes"
+                class="part part-eyes"
+                src="assets/snowman-pieces/eye-1.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="eyes-2"
+                class="part part-eyes-2"
+                src="assets/snowman-pieces/eye-2.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="nose"
+                class="part part-nose"
+                src="assets/snowman-pieces/carrot-nose.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="hat"
+                class="part part-hat"
+                src="assets/snowman-pieces/top-hat.png"
+                alt=""
+                hidden
+              />
+              <img
+                data-part="bow"
+                class="part part-bow"
+                src="assets/ui/bow.svg"
+                alt=""
+                hidden
+              />
+            </div>
+          </button>
+
+          <div id="feedLayer" class="play-layer feed-layer" hidden>
+            <button
+              type="button"
+              id="feedDeerBtn"
+              class="feed-deer-btn"
+              aria-label="Pet the reindeer"
+            >
+              <img src="assets/characters/baby-reindeer.png" alt="" />
+            </button>
+            <div id="treatField" class="treat-field"></div>
+            <div id="carrotField" class="carrot-field"></div>
+          </div>
+
+          <div id="snowLayer" class="play-layer snow-layer" hidden>
+            <div id="crystalField" class="crystal-field"></div>
+            <button
+              type="button"
+              id="snowBtn"
+              class="snow-btn"
+              aria-label="Make it snow"
+            >
+              <img src="assets/ui/snowflake.svg" alt="" />
+            </button>
+            <p class="snow-hint">Drag your finger to draw sparkles!</p>
+          </div>
+
+          <div id="learnLayer" class="play-layer learn-layer" hidden>
+            <div id="learnPicker" class="learn-picker">
+              <button type="button" class="learn-pick" data-learn="count" aria-label="Counting">
+                <span class="learn-pick-emoji" aria-hidden="true">🥕</span>
+                <span>Count</span>
+              </button>
+              <button type="button" class="learn-pick" data-learn="colors" aria-label="Colors">
+                <span class="learn-pick-emoji" aria-hidden="true">🧣</span>
+                <span>Colors</span>
+              </button>
+              <button type="button" class="learn-pick" data-learn="letters" aria-label="Letters">
+                <span class="learn-pick-emoji" aria-hidden="true">L</span>
+                <span>Letters</span>
+              </button>
+            </div>
+            <div id="learnPlay" class="learn-play" hidden>
+              <div id="learnStage" class="learn-stage" aria-live="polite"></div>
+              <div id="learnChoices" class="learn-choices"></div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="piece-bar">
+          <div id="choiceRow" class="choice-row" hidden></div>
+          <button
+            type="button"
+            id="pieceBtn"
+            class="piece-btn"
+            aria-label="Add this piece"
+          >
+            <span class="piece-preview" id="piecePreview" aria-hidden="true"></span>
+            <span class="piece-glow"></span>
+          </button>
+          <div id="partyBar" class="party-bar" hidden>
+            <button type="button" id="hugBtn" class="party-btn hug-btn">Hug</button>
+            <button type="button" id="tickleBtn" class="party-btn tickle-btn" hidden>
+              Tickle
+            </button>
+            <button type="button" id="againBtn" class="again-btn">Again</button>
+            <button type="button" id="moreBtn" class="party-btn more-btn">More</button>
+          </div>
+          <button type="button" id="snowMoreBtn" class="party-btn more-btn snow-more" hidden>
+            More
+          </button>
+          <button type="button" id="learnMoreBtn" class="party-btn more-btn learn-more" hidden>
+            More
+          </button>
+        </footer>
+      </section>
+
+      <div id="burst" class="burst" aria-hidden="true"></div>
+      <section id="voiceStudio" class="voice-studio" role="dialog" aria-modal="true" aria-label="Mommy and Daddy's voice studio" hidden>
+        <div class="studio-inner">
+          <div class="studio-top">
+            <div><p class="studio-eyebrow">Just for parents</p><h2>Her favorite voices are yours.</h2></div>
+            <button id="closeStudio" type="button" aria-label="Close voice studio">Done</button>
+          </div>
+          <p class="studio-intro">Record these short messages for Luna. Nothing is uploaded. They stay in this browser on this iPad, so use Back up to save each recording and Restore recording to bring it back. If a line is missing, the game shows its words and plays gentle sounds. It never uses a computer voice.</p>
+          <p id="voiceStatus" class="studio-status" role="status">Ready to record.</p>
+          <div id="voiceBoard" class="voice-board"></div>
+          <button id="studioMute" class="studio-mute" type="button">Mute game</button>
+          <button id="studioQuiet" class="studio-mute" type="button" aria-pressed="false">Quiet bedtime mode: off</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/sounds.js?v=kingdom1"></script>
+    <script src="js/speech.js?v=kingdom1"></script>
+    <script src="js/family-voices.js?v=kingdom1"></script>
+    <script src="js/kingdom.js?v=kingdom1"></script>
+    <script src="js/game.js?v=kingdom1"></script>
+  </body>
+</html>

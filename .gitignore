@@ -1,0 +1,13 @@
+# Luna's family media stays off the public repository.
+assets/family/
+assets/voice/
+*.m4a
+*.webm
+*.wav
+*.bak
+*.b64
+*.zip
+progress.md
+node_modules/
+.DS_Store
+Thumbs.db

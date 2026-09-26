@@ -1,0 +1,19 @@
+{
+  "backgrounds": {"palace": "backgrounds/ice-palace-bg.png", "forest": "backgrounds/snowy-forest-bg.png"},
+  "characters": {"guide": "characters/snow-princess.png", "snowmanFinal": "characters/snowman-complete.png", "reindeer": "characters/baby-reindeer.png"},
+  "steps": [
+    {"id": "welcome", "voice": "voice/01-welcome.mp3"},
+    {"id": "big", "piece": "snowman-pieces/snowball-big.png", "voice": "voice/02-big-snowball.mp3"},
+    {"id": "middle", "piece": "snowman-pieces/snowball-middle.png", "voice": "voice/03-middle-snowball.mp3"},
+    {"id": "head", "piece": "snowman-pieces/snowball-small.png", "voice": "voice/04-small-snowball.mp3"},
+    {"id": "eyes", "piece": ["snowman-pieces/eye-1.png", "snowman-pieces/eye-2.png"], "voice": "voice/05-eyes.mp3"},
+    {"id": "nose", "piece": "snowman-pieces/carrot-nose.png", "voice": "voice/06-carrot-nose.mp3"},
+    {"id": "arms", "piece": ["snowman-pieces/stick-arm-left.png", "snowman-pieces/stick-arm-right.png"], "voice": "voice/07-stick-arms.mp3"},
+    {"id": "buttons", "piece": "snowman-pieces/buttons.png", "voice": "voice/08-buttons.mp3"},
+    {"id": "finish", "voice": "voice/11-finish.mp3", "sfx": "sfx/celebrate-fanfare.mp3"}
+  ],
+  "bonusPieces": ["snowman-pieces/scarf.png", "snowman-pieces/top-hat.png"],
+  "feedback": {"correct": "voice/09-great-job.mp3", "wrong": "voice/10-try-again.mp3"},
+  "sfx": {"tap": "sfx/tap-pop.mp3", "place": "sfx/place-chime.mp3", "sparkle": "sfx/sparkle.mp3", "whoosh": "sfx/snow-whoosh.mp3", "soft": "sfx/try-again-soft.mp3"},
+  "ui": {"snowflake": "ui/snowflake.svg", "star": "ui/star-burst.svg"}
+}

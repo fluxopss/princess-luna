@@ -1,0 +1,58 @@
+/* Calm parent controls, separate from Luna's play surface. */
+.voice-studio[hidden] { display: none !important; }
+.voice-studio {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  background: rgba(25, 39, 83, .82);
+  color: #213058;
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+}
+.studio-inner {
+  width: min(100%, 720px);
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(16px, 4vw, 30px);
+  border: 3px solid #fff;
+  border-radius: 28px;
+  background: #f8faff;
+  box-shadow: 0 24px 80px rgba(14, 23, 71, .4);
+  -webkit-user-select: text;
+  user-select: text;
+}
+.studio-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+.studio-eyebrow { margin: 0 0 4px; color: #594190; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+.studio-top h2 { margin: 0; font-size: clamp(23px, 5vw, 32px); line-height: 1.1; }
+.studio-intro { margin: 14px 0; font-size: 16px; line-height: 1.5; }
+.studio-status { padding: 11px 14px; border-radius: 14px; background: #e5f3ff; font-size: 15px; line-height: 1.4; }
+.voice-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+.voice-card { padding: 14px; border: 2px solid #d9ddf3; border-radius: 18px; background: #fff; }
+.voice-card strong { display: block; font-size: 17px; }
+.voice-card p { min-height: 52px; margin: 8px 0 12px; line-height: 1.35; font-size: 15px; }
+.voice-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.voice-actions button, .voice-actions a, .studio-top button, .studio-mute {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #60449c;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.voice-actions button:first-child { background: #216ca4; }
+.voice-actions button:last-child:not(:first-child) { background: #e9e6ef; color: #293052; }
+.voice-actions button:disabled { opacity: .5; cursor: not-allowed; }
+.studio-mute { background: #2c447a; }
+.voice-studio :focus-visible { outline: 4px solid #ffa346; outline-offset: 3px; }
+@media (max-width: 570px) { .voice-board { grid-template-columns: 1fr; } .voice-card p { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .voice-studio * { animation: none !important; transition: none !important; } }
